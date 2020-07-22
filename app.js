@@ -10,7 +10,17 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.set('view engine','ejs');
 app.use(express.static("public"));
 
-mongoose.connect("mongodb+srv://" + config.username + ":" + config.password + "@cluster0.fbqex.mongodb.net/todolistDB", {
+let username = process.env.USERNAME;
+let password = process.env.PASSWORD;
+
+if(username == null || username == "" || username == "User") {
+    username = config.username;
+}
+if(password == null || password == "") {
+    password = config.password;
+}
+
+mongoose.connect("mongodb+srv://" + username + ":" + password + "@cluster0.fbqex.mongodb.net/todolistDB", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false
@@ -137,6 +147,11 @@ app.get("/about", function(req,res) {
     res.render('about');
 });
 
-app.listen(3000, function() {
-    console.log("Server started on port 3000.");
+let port = process.env.PORT;
+if(port == null || port == "") {
+    port = 3000;
+}
+
+app.listen(port, function() {
+    console.log("Server has started successfully..");
 });
