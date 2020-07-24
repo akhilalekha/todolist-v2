@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const _ = require('lodash');
-const config = require(__dirname+'/config');
+// const config = require(__dirname+'/config');
 
 const app = express();
 
@@ -13,12 +13,12 @@ app.use(express.static("public"));
 let username = process.env.USERNAME;
 let password = process.env.PASSWORD;
 
-if(username == null || username == "" || username == "User") {
-    username = config.username;
-}
-if(password == null || password == "") {
-    password = config.password;
-}
+// if(username == null || username == "" || username == "User") {
+//     username = config.username;
+// }
+// if(password == null || password == "") {
+//     password = config.password;
+// }
 
 mongoose.connect("mongodb+srv://" + username + ":" + password + "@cluster0.fbqex.mongodb.net/todolistDB", {
     useNewUrlParser: true,
