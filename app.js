@@ -13,13 +13,6 @@ app.use(express.static("public"));
 let username = process.env.USERNAME;
 let password = process.env.PASSWORD;
 
-// if(username == null || username == "" || username == "User") {
-//     username = config.username;
-// }
-// if(password == null || password == "") {
-//     password = config.password;
-// }
-
 // console.log(config.username);
 // console.log(config.password);
 
