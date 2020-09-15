@@ -10,8 +10,8 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.set('view engine','ejs');
 app.use(express.static("public"));
 
-let username = process.env.USERNAME;
-let password = process.env.PASSWORD;
+// let username = process.env.USERNAME;
+// let password = process.env.PASSWORD;
 
 // if(username == null || username == "" || username == "User") {
 //     username = config.username;
@@ -19,6 +19,9 @@ let password = process.env.PASSWORD;
 // if(password == null || password == "") {
 //     password = config.password;
 // }
+
+// console.log(config.username);
+// console.log(config.password);
 
 mongoose.connect("mongodb+srv://" + username + ":" + password + "@cluster0.fbqex.mongodb.net/todolistDB", {
     useNewUrlParser: true,
@@ -76,7 +79,6 @@ app.post("/",function(req, res) {
 
     const itemName = req.body.newItem;
     const listNameAdd = req.body.listNameAdd;
-    // console.log("listNameAdd: "+listNameAdd);
 
     const item = new Item({
         name: itemName
@@ -99,7 +101,6 @@ app.post("/delete", function(req, res) {
 
     const checkedItemId = req.body.checkbox;
     const listNameDel = req.body.listNameDel;
-    // console.log("listNameDel: "+listNameDel);
 
     if(listNameDel === "Today") {
         Item.findByIdAndRemove(checkedItemId, function(err) {
@@ -125,7 +126,6 @@ app.get("/:customListName", function(req, res) {
     List.findOne({name: customListName}, function(err, foundList) {
         if(!err) {
             if(!foundList) {
-                // console.log("Doesn't exist");
                 // if list not found, then create it
                     const list = new List({
                     name: customListName,
@@ -134,9 +134,7 @@ app.get("/:customListName", function(req, res) {
                 list.save();
                 res.redirect("/"+customListName);
             } else {
-                // console.log("Exists");
                 // if it's found then, render it
-                // console.log("found list name: "+foundList.name);
                 res.render("list", {listTitle : foundList.name, newListItems: foundList.items});
             }
         }
