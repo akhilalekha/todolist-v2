@@ -10,8 +10,8 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.set('view engine','ejs');
 app.use(express.static("public"));
 
-// let username = process.env.USERNAME;
-// let password = process.env.PASSWORD;
+let username = process.env.USERNAME;
+let password = process.env.PASSWORD;
 
 // if(username == null || username == "" || username == "User") {
 //     username = config.username;
